@@ -193,6 +193,7 @@ int head_update(const ObjectID *new_commit) {
 //   - head_update       : moves the branch pointer to your new commit
 //
 // Returns 0 on success, -1 on error.
+//changes
 int head_read(ObjectID *id_out) {
     FILE *f = fopen(".pes/refs/heads/main", "r");
     if (!f) return -1;
