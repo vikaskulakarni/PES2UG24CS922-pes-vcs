@@ -141,6 +141,7 @@ int index_status(const Index *index) {
 //   - hex_to_hash                      : converting the parsed string to ObjectID
 //
 // Returns 0 on success, -1 on error.
+//commited changes
 int index_load(Index *index) {
     if (!index) return -1;
     index->count = 0;
