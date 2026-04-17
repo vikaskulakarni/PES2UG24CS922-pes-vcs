@@ -2,7 +2,7 @@
 //
 // A tree object represents a directory snapshot. Each entry maps a name
 // to either a blob (file) or another tree (subdirectory), along with
-// the file mode (permissions + type).
+// the file mode (permissions + type).//updated
 
 #ifndef TREE_H
 #define TREE_H
