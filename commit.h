@@ -2,6 +2,7 @@
 //
 // A commit ties together a tree snapshot, parent history, author info,
 // and a human-readable message.
+//updated commit
 
 #ifndef COMMIT_H
 #define COMMIT_H
