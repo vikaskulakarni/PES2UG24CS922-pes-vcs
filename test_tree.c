@@ -98,9 +98,8 @@ void test_tree_determinism(void) {
 }
 
 int main(void) {
-    int rc __attribute__((unused));
-    rc = system("rm -rf .pes");
-    rc = system("mkdir -p .pes/objects .pes/refs/heads");
+    system("rm -rf .pes");
+    system("mkdir -p .pes/objects .pes/refs/heads");
 
     test_tree_roundtrip();
     test_tree_determinism();
