@@ -7,7 +7,7 @@ test_tree
 *.o
 *.obsidian
 
-# PES repository (created during testing)
+# PES repository (created during testing phase)
 .pes/
 
 # Editor files
