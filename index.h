@@ -3,6 +3,7 @@
 // The index is a text file (.pes/index) that tracks which files are
 // staged for the next commit. It maps file paths to their blob hashes
 // and stores metadata for fast change detection.
+//tracking done
 
 #ifndef INDEX_H
 #define INDEX_H
@@ -42,15 +43,16 @@ IndexEntry* index_find(Index *index, const char *path);
 
 // Print the status of the working directory compared to the index and HEAD.
 // Output format:
-//   Staged changes:
-//     staged:     <path>
+//   Staged changes (index vs HEAD):
+//     new file:   <path>
+//     modified:   <path>
 //
-//   Unstaged changes:
+//   Unstaged changes (working dir vs index):
 //     modified:   <path>
 //     deleted:    <path>
 //
 //   Untracked files:
-//     untracked:  <path>
+//     <path>
 int index_status(const Index *index);
 
 #endif // INDEX_H
