@@ -1,6 +1,7 @@
 // pes.h — Core data structures and constants for PES-VCS
 //
-// This file is PROVIDED. Do not modify.
+// This file is PROVIDED. Do not modify unless adding helper declarations
+// for your own utility functions.
 
 #ifndef PES_H
 #define PES_H
@@ -51,7 +52,7 @@ int hex_to_hash(const char *hex, ObjectID *id_out);
 // To set your name:
 //   export PES_AUTHOR="Your Name <PESXUG24CS042>"
 
-#define DEFAULT_AUTHOR "PES User <pes@localhost>"
+#define DEFAULT_AUTHOR "vikaskulakarni <PES2UG24CS922>"
 
 static inline const char* pes_author(void) {
     const char *env = getenv("PES_AUTHOR");
