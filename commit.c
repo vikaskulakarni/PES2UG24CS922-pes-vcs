@@ -193,9 +193,62 @@ int head_update(const ObjectID *new_commit) {
 //   - head_update       : moves the branch pointer to your new commit
 //
 // Returns 0 on success, -1 on error.
-int commit_create(const char *message, ObjectID *commit_id_out) {
-    // TODO: Implement commit creation
-    // (See Lab Appendix for logical steps)
-    (void)message; (void)commit_id_out;
-    return -1;
+int head_read(ObjectID *id_out) {
+    FILE *f = fopen(".pes/refs/heads/main", "r");
+    if (!f) return -1;
+
+    char hex[65];
+    if (!fgets(hex, sizeof(hex), f)) {
+        fclose(f);
+        return -1;
+    }
+
+    fclose(f);
+
+    return hex_to_hash(hex, id_out);
+}
+
+int head_update(const ObjectID *id) {
+    char hex[65];
+    hash_to_hex(id, hex);
+
+    FILE *f = fopen(".pes/refs/heads/main", "w");
+    if (!f) return -1;
+
+    fprintf(f, "%s\n", hex);
+    fclose(f);
+
+    return 0;
+}
+
+int commit_create(const Index *index, const char *message, ObjectID *id_out) {
+    ObjectID tree_id;
+    tree_from_index(index, &tree_id);
+
+    ObjectID parent;
+    int has_parent = (head_read(&parent) == 0);
+
+    char tree_hex[65];
+    hash_to_hex(&tree_id, tree_hex);
+
+    char parent_hex[65];
+    if (has_parent) hash_to_hex(&parent, parent_hex);
+
+    char content[1024];
+
+    if (has_parent) {
+        snprintf(content, sizeof(content),
+                 "tree %s\nparent %s\nauthor user %ld\ncommitter user %ld\n\n%s\n",
+                 tree_hex, parent_hex, time(NULL), time(NULL), message);
+    } else {
+        snprintf(content, sizeof(content),
+                 "tree %s\nauthor user %ld\ncommitter user %ld\n\n%s\n",
+                 tree_hex, time(NULL), time(NULL), message);
+    }
+
+    object_write(OBJ_COMMIT, content, strlen(content), id_out);
+
+    head_update(id_out);
+
+    return 0;
 }
